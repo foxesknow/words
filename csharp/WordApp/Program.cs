@@ -7,7 +7,7 @@ using Spectre.Console;
 
 internal class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var filename = "words_alpha.txt";
         var words = new WordStore();
@@ -20,6 +20,9 @@ internal class Program
             });
         });
 
-        AnsiConsole.Markup($"[green]Loaded {words.Count} words[/]");
+        AnsiConsole.MarkupLine($"[green]Loaded {words.Count} words[/]");
+
+        var processor = new FirstLetterDistributionWordProcessor(words);
+        await processor.Process();
     }
 }
