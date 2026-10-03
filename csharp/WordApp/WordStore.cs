@@ -58,6 +58,14 @@ internal sealed class WordStore : IReadOnlyWordStore
         }
     }
 
+    public IEnumerable<IReadOnlyList<Word>> Indexes()
+    {
+        for(int i = 0, length = m_Indexes.Length; i < length; i++)
+        {
+            yield return m_Indexes[i];
+        }
+    }
+
     private List<Word> GetIndex(byte asciiValue)
     {
         if(asciiValue >= AsciiUpperA && asciiValue <= AsciiUpperZ)

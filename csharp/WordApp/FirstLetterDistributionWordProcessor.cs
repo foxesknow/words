@@ -12,9 +12,8 @@ internal class FirstLetterDistributionWordProcessor(IReadOnlyWordStore wordStore
     {
         double count = wordStore.Count;
 
-        Color[] colors = [Color.Green, Color.Blue, Color.Yellow, Color.Orange1, Color.Aquamarine1, Color.DeepPink1];
-        
         var chart = new BarChart();
+        chart.Label = new("Distribution of words");
         chart.UseValueFormatter(d => d.ToString("F2") + "%");
 
         foreach(var (i, c, color) in IWordProcessor.ColorsByLetter())
@@ -26,6 +25,7 @@ internal class FirstLetterDistributionWordProcessor(IReadOnlyWordStore wordStore
         }
 
         AnsiConsole.Write(chart);
+        AnsiConsole.WriteLine();
 
         return default;
     }
