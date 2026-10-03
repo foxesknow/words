@@ -14,10 +14,12 @@ internal class CountWordProcessor(IReadOnlyWordStore wordStore) : IWordProcessor
 
         chart.UseValueFormatter(d => d.ToString("F0"));
 
+        var results = wordStore.Process(static (_, words) => words.Count);
+
         foreach(var (i, c, color) in IWordProcessor.ColorsByLetter())
         {
-            var words = wordStore[i];
-            chart.AddItem(c.ToString(), words.Count, color);
+            var count = results[i];
+            chart.AddItem(c.ToString(), count, color);
         }
 
         AnsiConsole.Write(chart);

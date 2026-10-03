@@ -22,7 +22,7 @@ internal class Program
 
         AnsiConsole.MarkupLine($"[green]Loaded {words.Count} words[/]");
 
-        var processor = new CountWordProcessor(words);
+        var processor = new FirstLetterDistributionWordProcessor(words);
         await processor.Process();
     }
 }

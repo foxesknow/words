@@ -16,11 +16,11 @@ internal class FirstLetterDistributionWordProcessor(IReadOnlyWordStore wordStore
         chart.Label = new("Distribution of words");
         chart.UseValueFormatter(d => d.ToString("F2") + "%");
 
+        var results = wordStore.Process(count, static (count, _, words) => (words.Count / count) * 100);
+
         foreach(var (i, c, color) in IWordProcessor.ColorsByLetter())
         {
-            var words = wordStore[i];
-            var percentage = (words.Count / count) * 100;
-
+            var percentage = results[i];
             chart.AddItem(c.ToString(), percentage, color);
         }
 
