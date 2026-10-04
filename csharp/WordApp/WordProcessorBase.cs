@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -15,5 +16,10 @@ internal class WordProcessorBase
 
         var elapsed = Stopwatch.GetElapsedTime(start, stop);
         return (elapsed, result);
+    }
+
+    protected static void ReportTimeTaken(TimeSpan elapsed)
+    {
+        AnsiConsole.WriteLine($"Time taken = {elapsed.TotalMilliseconds} ms");
     }
 }

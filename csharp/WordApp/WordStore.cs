@@ -66,32 +66,6 @@ internal sealed class WordStore : IReadOnlyWordStore
         }
     }
 
-    public LetterResults<T> Process<T>(Func<int, IReadOnlyList<Word>, T> function)
-    {
-        var results = new LetterResults<T>();
-
-        for(int i = 0, length = m_Indexes.Length; i < length; i++)
-        {
-            var index = m_Indexes[i];
-            results[i] = function(i, index);
-        }
-
-        return results;
-    }
-
-    public LetterResults<T> Process<T, S>(S state, Func<S, int, IReadOnlyList<Word>, T> function)
-    {
-        var results = new LetterResults<T>();
-
-        for(int i = 0, length = m_Indexes.Length; i < length; i++)
-        {
-            var index = m_Indexes[i];
-            results[i] = function(state, i, index);
-        }
-
-        return results;
-    }
-
     private List<Word> GetIndex(byte asciiValue)
     {
         if(asciiValue >= AsciiUpperA && asciiValue <= AsciiUpperZ)

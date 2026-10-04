@@ -32,7 +32,7 @@ internal class LongestWordProcessor(IReadOnlyWordStore wordStore) : WordProcesso
         }
 
         AnsiConsole.Write(table);
-        AnsiConsole.WriteLine($"Time taken = {elapsed.TotalMilliseconds} ms");
+        ReportTimeTaken(elapsed);
 
         return default;
     }
