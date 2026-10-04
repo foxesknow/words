@@ -23,25 +23,22 @@ internal class LengthWordProcessor(IReadOnlyWordStore wordStore) : WordProcessor
             return counts;
         });
 
-        var table = new Table();
-        table.Title = new("Word lengths");
-
-        table.AddColumn("Length");
-        table.AddColumn("Count");
-        table.AddColumn("Percentage");
+        var chart = new BarChart();
+        chart.Label= new("Word lengths");
 
         double totalWords = wordStore.Count;
 
-        for(int i = 0, length = counts.Length; i < length; i++)
+        foreach(var (i, color) in IWordProcessor.ColorCyle().Index().Take(counts.Length))
         {
             var count = counts[i];
             if(count == 0) continue;
 
             var percentage = (count / totalWords) * 100;
-            table.AddRow(i.ToString(), count.ToString(), percentage.ToString("F2"));
+            var label = $"{i,2}|{percentage,5:F2}%|";
+            chart.AddItem(label, count, color);
         }
 
-        AnsiConsole.Write(table);
+        AnsiConsole.Write(chart);
         ReportTimeTaken(elapsed);
 
         return default;
